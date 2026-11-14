@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +12,19 @@
  */
 public class FCocinero extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FCocinero
-     */
+    Conexion cnx = new Conexion();
+    String todo = "SELECT * FROM comandas";
+    
     public FCocinero(String usuario) {
         initComponents();
+        setLocationRelativeTo(this);
+        
+        if (cnx.conectar("localhost", "fondatel", "root", "") == 1) {
+            cnx.entablar(todo, TComandas);
+        }else{
+             JOptionPane.showMessageDialog(this, "Sin conexión. La ventana se cerrará...");
+             System.exit(0);
+        }
     }
 
     /**
@@ -28,8 +38,15 @@ public class FCocinero extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        LUsuario = new javax.swing.JLabel();
+        jToolBar1 = new javax.swing.JToolBar();
+        CBEstado = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        jLabel2 = new javax.swing.JLabel();
+        TFEstado = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        BActualizar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TComandas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,50 +56,91 @@ public class FCocinero extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 204));
         jLabel1.setText("Ventana del Cocinero");
 
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Administración de Usuarios");
-
-        LUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        LUsuario.setText("Usuario:");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                .addComponent(LUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(218, 218, 218)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(LUsuario)
-                .addGap(21, 21, 21))
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(25, 25, 25))
         );
+
+        jToolBar1.setBackground(new java.awt.Color(204, 204, 255));
+        jToolBar1.setRollover(true);
+
+        CBEstado.setLightWeightPopupEnabled(false);
+        CBEstado.setMaximumSize(new java.awt.Dimension(150, 40));
+        CBEstado.setMinimumSize(new java.awt.Dimension(150, 40));
+        CBEstado.setName(""); // NOI18N
+        CBEstado.setPreferredSize(new java.awt.Dimension(150, 40));
+        jToolBar1.add(CBEstado);
+
+        jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
+        jToolBar1.add(jSeparator1);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("ESTADO:");
+        jToolBar1.add(jLabel2);
+
+        TFEstado.setMaximumSize(new java.awt.Dimension(150, 40));
+        TFEstado.setMinimumSize(new java.awt.Dimension(150, 40));
+        TFEstado.setPreferredSize(new java.awt.Dimension(150, 40));
+        jToolBar1.add(TFEstado);
+
+        jSeparator2.setMaximumSize(new java.awt.Dimension(20, 32767));
+        jSeparator2.setMinimumSize(new java.awt.Dimension(50, 0));
+        jToolBar1.add(jSeparator2);
+
+        BActualizar.setText("ACTUALIZAR");
+        BActualizar.setFocusable(false);
+        BActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BActualizar.setMaximumSize(new java.awt.Dimension(85, 40));
+        BActualizar.setMinimumSize(new java.awt.Dimension(85, 40));
+        BActualizar.setPreferredSize(new java.awt.Dimension(85, 40));
+        BActualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(BActualizar);
+
+        TComandas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(TComandas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 320, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -124,9 +182,16 @@ public class FCocinero extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LUsuario;
+    private javax.swing.JButton BActualizar;
+    private javax.swing.JComboBox<String> CBEstado;
+    private javax.swing.JTable TComandas;
+    private javax.swing.JTextField TFEstado;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

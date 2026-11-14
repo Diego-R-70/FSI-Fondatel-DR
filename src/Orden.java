@@ -85,4 +85,15 @@ public class Orden {
         }
     }
     
+    public int actualizarEstado(java.sql.Connection con, int folio, String estado) {
+        String sql = "UPDATE ordenes SET estadoo = ? WHERE folio = ?";
+        try (java.sql.PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, estado);
+            ps.setInt(2, folio);
+            return ps.executeUpdate() > 0 ? 1 : 0;   // 1 = se actualizó, 0 = no
+        } catch (java.sql.SQLException ex) {
+            System.out.println(ex.getMessage());
+            return 0;
+        }
+    }
 }
