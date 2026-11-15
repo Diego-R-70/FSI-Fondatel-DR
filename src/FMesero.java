@@ -67,16 +67,16 @@ public class FMesero extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(194, 194, 194)
+                .addGap(396, 396, 396)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jToolBar1.setBackground(new java.awt.Color(204, 204, 255));
@@ -104,6 +104,11 @@ public class FMesero extends javax.swing.JFrame {
         TFEstado.setMaximumSize(new java.awt.Dimension(150, 40));
         TFEstado.setMinimumSize(new java.awt.Dimension(150, 40));
         TFEstado.setPreferredSize(new java.awt.Dimension(150, 40));
+        TFEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFEstadoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(TFEstado);
 
         jSeparator2.setMaximumSize(new java.awt.Dimension(20, 32767));
@@ -147,11 +152,11 @@ public class FMesero extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1029, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1005, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
@@ -209,6 +214,10 @@ public class FMesero extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se pudo actualizar el estado");
         }
     }//GEN-LAST:event_BActualizarActionPerformed
+
+    private void TFEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TFEstadoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -41,7 +41,7 @@ public class FGerente extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JToolBar.Separator();
         BEmpleados = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        BMesas = new javax.swing.JButton();
+        BMenu = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jScrollPane1 = new javax.swing.JScrollPane();
         TUsuarios = new javax.swing.JTable();
@@ -91,9 +91,12 @@ public class FGerente extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
+        BAlimentos.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         BAlimentos.setText("ALIMENTOS");
         BAlimentos.setFocusable(false);
         BAlimentos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BAlimentos.setMaximumSize(new java.awt.Dimension(133, 35));
+        BAlimentos.setMinimumSize(new java.awt.Dimension(133, 35));
         BAlimentos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BAlimentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,9 +106,12 @@ public class FGerente extends javax.swing.JFrame {
         jToolBar1.add(BAlimentos);
         jToolBar1.add(jSeparator3);
 
+        BEmpleados.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         BEmpleados.setText("EMPLEADOS");
         BEmpleados.setFocusable(false);
         BEmpleados.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BEmpleados.setMaximumSize(new java.awt.Dimension(140, 35));
+        BEmpleados.setMinimumSize(new java.awt.Dimension(140, 35));
         BEmpleados.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,19 +121,19 @@ public class FGerente extends javax.swing.JFrame {
         jToolBar1.add(BEmpleados);
         jToolBar1.add(jSeparator1);
 
-        BMesas.setText("MESAS");
-        BMesas.setFocusable(false);
-        BMesas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BMesas.setMaximumSize(new java.awt.Dimension(73, 60));
-        BMesas.setMinimumSize(new java.awt.Dimension(73, 60));
-        BMesas.setPreferredSize(new java.awt.Dimension(73, 60));
-        BMesas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        BMesas.addActionListener(new java.awt.event.ActionListener() {
+        BMenu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        BMenu.setText("MENU");
+        BMenu.setFocusable(false);
+        BMenu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BMenu.setMaximumSize(new java.awt.Dimension(133, 35));
+        BMenu.setMinimumSize(new java.awt.Dimension(133, 35));
+        BMenu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BMesasActionPerformed(evt);
+                BMenuActionPerformed(evt);
             }
         });
-        jToolBar1.add(BMesas);
+        jToolBar1.add(BMenu);
         jToolBar1.add(jSeparator2);
 
         TUsuarios.setModel(new javax.swing.table.DefaultTableModel(
@@ -191,12 +197,12 @@ public class FGerente extends javax.swing.JFrame {
          
     }//GEN-LAST:event_TUsuariosMouseClicked
 
-    private void BMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMesasActionPerformed
-       FMesas fm = new FMesas();
+    private void BMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMenuActionPerformed
+       FMenu fm = new FMenu();
        fm.setVisible(true);
        cnx.desconectar();
        this.dispose();
-    }//GEN-LAST:event_BMesasActionPerformed
+    }//GEN-LAST:event_BMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,7 +242,7 @@ public class FGerente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BAlimentos;
     private javax.swing.JButton BEmpleados;
-    private javax.swing.JButton BMesas;
+    private javax.swing.JButton BMenu;
     private javax.swing.JLabel LUsuario;
     private javax.swing.JTable TUsuarios;
     private javax.swing.JLabel jLabel1;
