@@ -1,4 +1,5 @@
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,17 +15,21 @@ public class FCocinero extends javax.swing.JFrame {
 
     Conexion cnx = new Conexion();
     String todo = "SELECT * FROM comandas";
+    String resumen = "SELECT folio, fecha_hora, nombre, estadoo FROM comandas";
+    String conIndicaciones = "SELECT * FROM comandas WHERE observaciones != 'N/A'";
+    
     
     public FCocinero(String usuario) {
         initComponents();
         setLocationRelativeTo(this);
         
-        if (cnx.conectar("localhost", "fondatel", "root", "") == 1) {
+       if (cnx.conectar("localhost", "fondatel", "root", "") == 1) {
             cnx.entablar(todo, TComandas);
         }else{
              JOptionPane.showMessageDialog(this, "Sin conexión. La ventana se cerrará...");
              System.exit(0);
         }
+        
     }
 
     /**
@@ -39,11 +44,14 @@ public class FCocinero extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
-        CBEstado = new javax.swing.JComboBox<>();
+        BTodos = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jLabel2 = new javax.swing.JLabel();
-        TFEstado = new javax.swing.JTextField();
+        BResumen = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        BObservaciones = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        TFEstado = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
         BActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TComandas = new javax.swing.JTable();
@@ -76,36 +84,76 @@ public class FCocinero extends javax.swing.JFrame {
         jToolBar1.setBackground(new java.awt.Color(204, 204, 255));
         jToolBar1.setRollover(true);
 
-        CBEstado.setLightWeightPopupEnabled(false);
-        CBEstado.setMaximumSize(new java.awt.Dimension(150, 40));
-        CBEstado.setMinimumSize(new java.awt.Dimension(150, 40));
-        CBEstado.setName(""); // NOI18N
-        CBEstado.setPreferredSize(new java.awt.Dimension(150, 40));
-        jToolBar1.add(CBEstado);
+        BTodos.setText("TODOS");
+        BTodos.setFocusable(false);
+        BTodos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BTodos.setMaximumSize(new java.awt.Dimension(85, 40));
+        BTodos.setMinimumSize(new java.awt.Dimension(85, 40));
+        BTodos.setPreferredSize(new java.awt.Dimension(85, 40));
+        BTodos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTodosActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(BTodos);
 
         jSeparator1.setMaximumSize(new java.awt.Dimension(20, 32767));
         jToolBar1.add(jSeparator1);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("ESTADO:");
-        jToolBar1.add(jLabel2);
-
-        TFEstado.setMaximumSize(new java.awt.Dimension(150, 40));
-        TFEstado.setMinimumSize(new java.awt.Dimension(150, 40));
-        TFEstado.setPreferredSize(new java.awt.Dimension(150, 40));
-        jToolBar1.add(TFEstado);
+        BResumen.setText("RESUMIR");
+        BResumen.setFocusable(false);
+        BResumen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BResumen.setMaximumSize(new java.awt.Dimension(85, 40));
+        BResumen.setMinimumSize(new java.awt.Dimension(85, 40));
+        BResumen.setPreferredSize(new java.awt.Dimension(85, 40));
+        BResumen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BResumen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BResumenActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(BResumen);
 
         jSeparator2.setMaximumSize(new java.awt.Dimension(20, 32767));
         jSeparator2.setMinimumSize(new java.awt.Dimension(50, 0));
         jToolBar1.add(jSeparator2);
 
-        BActualizar.setText("ACTUALIZAR");
+        BObservaciones.setText("OBSERVACIONES");
+        BObservaciones.setFocusable(false);
+        BObservaciones.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BObservaciones.setMaximumSize(new java.awt.Dimension(130, 40));
+        BObservaciones.setMinimumSize(new java.awt.Dimension(130, 40));
+        BObservaciones.setPreferredSize(new java.awt.Dimension(130, 40));
+        BObservaciones.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BObservaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BObservacionesActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(BObservaciones);
+
+        jSeparator3.setMaximumSize(new java.awt.Dimension(20, 32767));
+        jToolBar1.add(jSeparator3);
+
+        TFEstado.setMaximumSize(new java.awt.Dimension(150, 40));
+        TFEstado.setMinimumSize(new java.awt.Dimension(150, 40));
+        TFEstado.setPreferredSize(new java.awt.Dimension(150, 40));
+        jToolBar1.add(TFEstado);
+        jToolBar1.add(jSeparator4);
+
+        BActualizar.setText("Actualizar");
         BActualizar.setFocusable(false);
         BActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BActualizar.setMaximumSize(new java.awt.Dimension(85, 40));
+        BActualizar.setMaximumSize(new java.awt.Dimension(130, 40));
         BActualizar.setMinimumSize(new java.awt.Dimension(85, 40));
         BActualizar.setPreferredSize(new java.awt.Dimension(85, 40));
         BActualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BActualizarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(BActualizar);
 
         TComandas.setModel(new javax.swing.table.DefaultTableModel(
@@ -119,6 +167,11 @@ public class FCocinero extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TComandas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TComandasMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(TComandas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -145,6 +198,62 @@ public class FCocinero extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTodosActionPerformed
+         if (cnx.conectar("localhost", "fondatel", "root", "") == 1) {
+            cnx.entablar(todo, TComandas);
+        }else{
+             JOptionPane.showMessageDialog(this, "Sin conexión. La ventana se cerrará...");
+             System.exit(0);
+        }
+    }//GEN-LAST:event_BTodosActionPerformed
+
+    private void BResumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BResumenActionPerformed
+        if (cnx.conectar("localhost", "fondatel", "root", "") == 1) {
+            cnx.entablar(resumen, TComandas);
+        }else{
+             JOptionPane.showMessageDialog(this, "Sin conexión. La ventana se cerrará...");
+             System.exit(0);
+        }
+    }//GEN-LAST:event_BResumenActionPerformed
+
+    private void BObservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BObservacionesActionPerformed
+        if (cnx.conectar("localhost", "fondatel", "root", "") == 1) {
+            cnx.entablar(conIndicaciones, TComandas);
+        }else{
+             JOptionPane.showMessageDialog(this, "Sin conexión. La ventana se cerrará...");
+             System.exit(0);
+        }
+    }//GEN-LAST:event_BObservacionesActionPerformed
+
+    private void BActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActualizarActionPerformed
+        int ren = TComandas.getSelectedRow();
+        if (ren < 0) {
+            JOptionPane.showMessageDialog(this, "Selecciona una orden primero.");
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) TComandas.getModel();
+        int folio = Integer.parseInt(String.valueOf(modelo.getValueAt(ren, 0)));
+        String estado = TFEstado.getText().trim();
+
+        Orden ord = new Orden();
+        if (ord.actualizarEstado(cnx.con, folio, estado) == 1) {
+            cnx.entablar(todo, TComandas);   // recarga la tabla
+            JOptionPane.showMessageDialog(this, "Estado modificado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo actualizar el estado");
+        }
+    }//GEN-LAST:event_BActualizarActionPerformed
+
+    private void TComandasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TComandasMousePressed
+        int ren = TComandas.getSelectedRow();
+        DefaultTableModel modelo = (DefaultTableModel) TComandas.getModel();
+
+        if (ren >= 0) {
+            TFEstado.setText(String.valueOf(modelo.getValueAt(ren, 3)));
+        }
+    }//GEN-LAST:event_TComandasMousePressed
 
     /**
      * @param args the command line arguments
@@ -183,15 +292,18 @@ public class FCocinero extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BActualizar;
-    private javax.swing.JComboBox<String> CBEstado;
+    private javax.swing.JButton BObservaciones;
+    private javax.swing.JButton BResumen;
+    private javax.swing.JButton BTodos;
     private javax.swing.JTable TComandas;
     private javax.swing.JTextField TFEstado;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

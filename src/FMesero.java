@@ -210,6 +210,7 @@ public class FMesero extends javax.swing.JFrame {
         Orden ord = new Orden();
         if (ord.actualizarEstado(cnx.con, folio, estado) == 1) {
             cnx.entablar(todo, TPedidos);   // recarga la tabla
+            JOptionPane.showMessageDialog(this, "Estado actualizado");
         } else {
             JOptionPane.showMessageDialog(this, "No se pudo actualizar el estado");
         }
